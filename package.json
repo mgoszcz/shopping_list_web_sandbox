@@ -2,22 +2,17 @@
   "name": "shopping_list_web_sandbox",
   "version": "1.0.0",
   "description": "",
-  "main": "script.js",
+  "default": "index.html",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html --dist-dir ./dist"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mgoszcz/shopping_list_web_sandbox.git"
-  },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mgoszcz/shopping_list_web_sandbox/issues"
-  },
   "devDependencies": {
     "parcel": "^2.8.1"
   },
-  "homepage": "https://github.com/mgoszcz/shopping_list_web_sandbox#readme"
+  "dependencies": {
+    "core-js": "^3.27.1"
+  }
 }

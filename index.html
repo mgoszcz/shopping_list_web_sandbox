@@ -4,13 +4,46 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="style.css" />
-    <script type="module" src="script.js"></script>
+    <link rel="stylesheet" href="src/css/style.css" />
+    <script type="module" src="src/js/controller.js"></script>
 
     <title>shopping list web snadbox</title>
   </head>
 
   <body>
-    sandbox
+    <div class="container">
+      <header class="header">
+        Shopping list
+        <form class="search">
+          <input
+            type="text"
+            class="search__field"
+            placeholder="Type here for shopping article..."
+          />
+          <button class="btn search__btn">
+            <!-- <svg class="search__icon">
+              <use href="src/img/icons.svg#icon-search"></use>
+            </svg> -->
+            <span>Search</span>
+          </button>
+        </form>
+      </header>
+    </div>
+    <div class="shopping-list-container">
+      <ul class="shopping-list">
+        <li class="shooping-list-item">
+          <div class="list-item-content">
+            <div class="item-label-container">
+              <span class="item-label">banany</span>
+            </div>
+            <div class="category-container">
+              <span class="category-label">owoce</span>
+            </div>
+            <div class="move-button-container">M</div>
+            <div class="delete-button-container">X</div>
+          </div>
+        </li>
+      </ul>
+    </div>
   </body>
 </html>
