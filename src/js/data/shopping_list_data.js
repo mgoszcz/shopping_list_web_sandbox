@@ -23,7 +23,7 @@ const loadArticles = function (articles) {
 const loadShoppingList = function (shoppingListItems) {
   const shoppingList = [];
   shoppingListItems.forEach(item => {
-    article = shoppingListData.shoppingArticlesList.find(
+    const article = shoppingListData.shoppingArticlesList.find(
       shoppingArticle => shoppingArticle.name === item.article_name
     );
     shoppingList.push(new ShoppingListItem(article, item.amount, item.checked));
