@@ -1,4 +1,4 @@
-const URL = 'http://mgoszcz.pythonanywhere.com/shopping_list';
+const URL = 'https://mgoszcz.pythonanywhere.com/shopping_list';
 
 export const apiGet = async function () {
   try {
