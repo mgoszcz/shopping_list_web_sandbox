@@ -13,7 +13,6 @@
   <body>
     <div class="container">
       <header class="header">
-        Shopping list
         <form class="search">
           <input
             type="text"
@@ -24,9 +23,10 @@
             <!-- <svg class="search__icon">
               <use href="src/img/icons.svg#icon-search"></use>
             </svg> -->
-            <span>Search</span>
+            <span>Add</span>
           </button>
         </form>
+        Shopping list
       </header>
     </div>
     <div class="shopping-list-container">
@@ -39,8 +39,68 @@
             <div class="category-container">
               <span class="category-label">owoce</span>
             </div>
-            <div class="move-button-container">M</div>
-            <div class="delete-button-container">X</div>
+            <div class="move-button-container">
+              <img
+                class="list-item-button"
+                src="./src/icons/swap.png"
+                alt="Move"
+              />
+            </div>
+            <div class="delete-button-container">
+              <img
+                class="list-item-button"
+                src="./src/icons/delete.png"
+                alt="Delete"
+              />
+            </div>
+          </div>
+        </li>
+        <li class="shooping-list-item">
+          <div class="list-item-content checked-item">
+            <div class="item-label-container">
+              <span class="item-label">jabłka</span>
+            </div>
+            <div class="category-container">
+              <span class="category-label">owoce</span>
+            </div>
+            <div class="move-button-container">
+              <img
+                class="list-item-button"
+                src="./src/icons/swap.png"
+                alt="Move"
+              />
+            </div>
+            <div class="delete-button-container">
+              <img
+                class="list-item-button"
+                src="./src/icons/delete.png"
+                alt="Delete"
+              />
+            </div>
+          </div>
+        </li>
+        <li class="shooping-list-item">
+          <div class="list-item-content">
+            <div class="item-label-container">
+              <span class="item-label">mleko</span>
+            </div>
+            <div class="category-container">
+              <span class="category-label">nabiał</span>
+            </div>
+            <div class="move-button-container">
+              <img
+                class="list-item-button"
+                src="./src/icons/swap.png"
+                alt="Move"
+              />
+            </div>
+            <div class="delete-button-container">
+              <img
+                class="list-item-button"
+                src="./src/icons/delete.png"
+                alt="Delete"
+              />
+            </div>
           </div>
         </li>
       </ul>

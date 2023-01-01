@@ -1,6 +1,17 @@
+import moveIcon from 'url:../../icons/swap.png';
+import deleteIcon from 'url:../../icons/delete.png';
+
 class ShoppingListView {
   _data;
   _parentElement = document.querySelector('.shopping-list');
+
+  addHandlerClickItem(handler) {
+    this._parentElement.addEventListener('click', function (e) {
+      const item = e.target.closest('.shooping-list-item');
+      if (!item) return;
+      console.log(item);
+    });
+  }
 
   render(data) {
     this._data = data;
@@ -16,8 +27,20 @@ class ShoppingListView {
             <div class="category-container">
               <span class="category-label">${item.article.category}</span>
             </div>
-            <div class="move-button-container">M</div>
-            <div class="delete-button-container">X</div>
+            <div class="move-button-container">
+              <img
+                class="list-item-button"
+                src="${moveIcon}"
+                alt="Move"
+              />
+            </div>
+            <div class="delete-button-container">
+              <img
+                class="list-item-button"
+                src="${deleteIcon}"
+                alt="Delete"
+              />
+            </div>
           </div>
         </li>
         `;
