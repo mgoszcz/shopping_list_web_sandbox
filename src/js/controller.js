@@ -7,12 +7,17 @@ dorobic reakcje na klikanie
   wyrenderowac liste od nowa (na razie)
 */
 
-import { loadData, shoppingListData } from './data/shopping_list_data.js';
+import {
+  loadData,
+  shoppingListData,
+  toggleChecked,
+} from './data/shoppingListData.js';
 import shoppingListView from './views/shoppingListView.js';
 
 console.log('sandbox');
 
-const controlClickItem = function () {
+const controlClickItem = function (id) {
+  toggleChecked(id);
   shoppingListView.render(shoppingListData.shoppingList);
 };
 

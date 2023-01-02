@@ -125,3 +125,7 @@ body {
   background-color: #cdd1d1;
   text-decoration: line-through;
 }
+
+.checked-item:hover {
+  background-color: #b6d1d1;
+}

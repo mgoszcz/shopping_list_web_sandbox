@@ -9,7 +9,7 @@ class ShoppingListView {
     this._parentElement.addEventListener('click', function (e) {
       const item = e.target.closest('.shooping-list-item');
       if (!item) return;
-      console.log(item);
+      handler(item.dataset.id);
     });
   }
 
@@ -19,8 +19,8 @@ class ShoppingListView {
     const markup = this._data
       .map(item => {
         return `
-        <li class="shooping-list-item">
-          <div class="list-item-content">
+        <li class="shooping-list-item" data-id="${item.id}">
+          <div class="list-item-content ${item.checked ? 'checked-item' : ''}">
             <div class="item-label-container">
               <span class="item-label">${item.article.name}</span>
             </div>
