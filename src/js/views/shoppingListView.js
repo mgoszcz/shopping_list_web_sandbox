@@ -7,6 +7,8 @@ class ShoppingListView {
 
   addHandlerClickItem(handler) {
     this._parentElement.addEventListener('click', function (e) {
+      console.log(e.target);
+      if (e.target.classList.contains('amount-spinner')) return;
       const item = e.target.closest('.shooping-list-item');
       if (!item) return;
       handler(item.dataset.id);
@@ -23,6 +25,15 @@ class ShoppingListView {
           <div class="list-item-content ${item.checked ? 'checked-item' : ''}">
             <div class="item-label-container">
               <span class="item-label">${item.article.name}</span>
+            </div>
+            <div class="amount-container">
+              <input
+                type="number"
+                class="amount-spinner"
+                min="1"
+                step="1"
+                value="${item.amount}"
+              />
             </div>
             <div class="category-container">
               <span class="category-label">${item.article.category}</span>

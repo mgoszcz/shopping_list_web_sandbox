@@ -111,6 +111,16 @@ body {
   width: 30rem;
 }
 
+.amount-spinner {
+  width: 5rem;
+  height: 2rem;
+  background-color: inherit;
+  margin: 1rem;
+  border-radius: 0.5rem;
+  border-color: lightgray;
+  font-size: 1.5rem;
+}
+
 .list-item-button {
   height: 1.5rem;
   margin: 0 0.5rem;
