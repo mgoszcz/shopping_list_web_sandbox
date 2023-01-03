@@ -1,0 +1,26 @@
+Implement quantity handling
+Improve quantity display
+Work on mobile display
+
+push data to server when changing data
+
+add message for empty list
+
+Add removing shopping list item
+
+Implement category modification
+
+Implement articles list dropdown
+Implement articles list window
+Implement adding articles
+
+Implement adding new article
+
+Implement shop changing
+
+Implement clearing whole list
+
+Implement order change (drag and drop)
+
+...
+Update not render on small changes
