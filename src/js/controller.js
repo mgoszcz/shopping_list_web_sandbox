@@ -8,7 +8,9 @@ dorobic reakcje na klikanie
 */
 
 import {
+  getShoppingListItemById,
   loadData,
+  saveData,
   shoppingListData,
   toggleChecked,
 } from './data/shoppingListData.js';
@@ -19,15 +21,23 @@ console.log('sandbox');
 const controlClickItem = function (id) {
   toggleChecked(id);
   shoppingListView.render(shoppingListData.shoppingList);
+  saveData();
+};
+
+const controlQuantityChange = function (id, newQuantity) {
+  const item = getShoppingListItemById(id);
+  item.amount = Number(newQuantity);
+  saveData();
 };
 
 const init = async function () {
-  const data = await loadData();
+  await loadData();
   console.log(shoppingListData);
 
   shoppingListView.render(shoppingListData.shoppingList);
 
   shoppingListView.addHandlerClickItem(controlClickItem);
+  shoppingListView.addHandlerSetQuantity(controlQuantityChange);
 };
 
 init();

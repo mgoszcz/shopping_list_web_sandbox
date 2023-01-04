@@ -1,5 +1,5 @@
 :root {
-  --color-bg-light: #fefcf3;
+  --color-bg-light: #c8b562;
 
   --color-list-item-light: #f0dbdb;
   --color-list-item-light-hovered: #f0d1d1;
@@ -11,6 +11,12 @@
 
 body {
   background-color: var(--color-bg-light);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .btn {
@@ -112,7 +118,7 @@ body {
 }
 
 .amount-spinner {
-  width: 5rem;
+  width: 3rem;
   height: 2rem;
   background-color: inherit;
   margin: 1rem;

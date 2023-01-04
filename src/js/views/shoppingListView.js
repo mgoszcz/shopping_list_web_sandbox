@@ -4,14 +4,25 @@ import deleteIcon from 'url:../../icons/delete.png';
 class ShoppingListView {
   _data;
   _parentElement = document.querySelector('.shopping-list');
+  _quantity_input = document.querySelector('.amount-spinner');
 
   addHandlerClickItem(handler) {
     this._parentElement.addEventListener('click', function (e) {
-      console.log(e.target);
+      console.log(`addHandlerClickItem: ${e.target}`);
       if (e.target.classList.contains('amount-spinner')) return;
       const item = e.target.closest('.shooping-list-item');
       if (!item) return;
       handler(item.dataset.id);
+    });
+  }
+
+  addHandlerSetQuantity(handler) {
+    const input = this._parentElement.querySelector('.amount-spinner');
+    this._parentElement.addEventListener('change', function (e) {
+      const item = e.target.closest('.amount-spinner');
+      if (!item) return;
+      const container = e.target.closest('.shooping-list-item');
+      handler(container.dataset.id, item.value);
     });
   }
 
