@@ -53,7 +53,7 @@ export const loadDataFromJSON = function (jsonData) {
 };
 
 export const saveDataToJSON = function () {
-  jsonData = {
+  const jsonData = {
     categories: shoppingListData.categories,
     shopping_articles_list: shoppingListData.shoppingArticlesList.map(
       article => {
