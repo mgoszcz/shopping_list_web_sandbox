@@ -13,19 +13,30 @@
   <body>
     <div class="container">
       <header class="header">
-        <form class="search">
-          <input
-            type="text"
-            class="search__field"
-            placeholder="Type here for shopping article..."
-          />
-          <button class="btn search__btn">
-            <!-- <svg class="search__icon">
+        <div class="search-combo">
+          <form class="search">
+            <input
+              type="text"
+              class="search__field"
+              placeholder="Type here for shopping article..."
+            />
+            <button class="btn search__btn">
+              <!-- <svg class="search__icon">
               <use href="src/img/icons.svg#icon-search"></use>
             </svg> -->
-            <span>Add</span>
-          </button>
-        </form>
+              <span>Add</span>
+            </button>
+          </form>
+          <div class="add-item-dropdown">
+            <div class="dropdown-content hidden">
+              <ul class="dropdown__articles-list">
+                <li>
+                  <div class="dropdown__article">item</div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
         Shopping list
       </header>
     </div>

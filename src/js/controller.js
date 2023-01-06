@@ -15,6 +15,7 @@ import {
   toggleChecked,
 } from './data/shoppingListData.js';
 import shoppingListView from './views/shoppingListView.js';
+import searchView from './views/searchView.js';
 
 console.log('sandbox');
 
@@ -38,6 +39,8 @@ const init = async function () {
 
   shoppingListView.addHandlerClickItem(controlClickItem);
   shoppingListView.addHandlerSetQuantity(controlQuantityChange);
+
+  searchView.render(shoppingListData.shoppingArticlesList);
 };
 
 init();
