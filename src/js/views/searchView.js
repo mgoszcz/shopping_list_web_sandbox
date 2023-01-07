@@ -4,16 +4,49 @@ class SearchView {
   _searchEntry = document.querySelector('.search__field');
   _dropdown = document.querySelector('.dropdown-content');
   _dropdownList = document.querySelector('.dropdown__articles-list');
+  _focusInHnadler;
+  _keyPressHandler;
 
   constructor() {
-    this._searchEntry.addEventListener(
-      'focusin',
-      this.displayDropdown.bind(this)
-    );
     this._searchEntry.addEventListener(
       'focusout',
       this.hideDropdown.bind(this)
     );
+    this._dropdown.addEventListener(
+      'click',
+      this.dropdownSelectItem.bind(this)
+    );
+  }
+
+  addHandlerFocusIn(handler) {
+    this._focusInHnadler = handler;
+    this._searchEntry.addEventListener(
+      'focusin',
+      this.focusInActions.bind(this)
+    );
+  }
+
+  addHandlerKeyPress(handler) {
+    this._keyPressHandler = handler;
+    this._searchEntry.addEventListener(
+      'input',
+      this.keyPressActions.bind(this)
+    );
+  }
+
+  dropdownSelectItem(e) {
+    console.log(e.target);
+  }
+
+  focusInActions() {
+    const searchFieldValue = this._searchEntry.value;
+    this._focusInHnadler(searchFieldValue);
+    console.log(this._dropdownList.style.height);
+  }
+
+  keyPressActions() {
+    const searchFieldValue = this._searchEntry.value;
+    this._keyPressHandler(searchFieldValue);
   }
 
   displayDropdown() {
@@ -22,8 +55,9 @@ class SearchView {
   }
 
   hideDropdown() {
-    console.log('hide');
-    this._dropdown.classList.add('hidden');
+    console.log(document.activeElement);
+    if (document.activeElement === this._dropdownList) return;
+    // this._dropdown.classList.add('hidden');
   }
 
   render(data) {
