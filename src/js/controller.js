@@ -16,7 +16,12 @@ import {
 } from './data/shoppingListData.js';
 import shoppingListView from './views/shoppingListView.js';
 import searchView from './views/searchView.js';
-import { filterArticles } from './data/shoppingArticles.js';
+import { filterArticles, getArticleByName } from './data/shoppingArticles.js';
+import {
+  addArticleToShoppingList,
+  getShoppingListItemByName,
+  sortByShop,
+} from './data/shoppingListItem.js';
 
 console.log('sandbox');
 
@@ -49,6 +54,17 @@ const controlSearchFieldKeyPress = function (filterText) {
   searchView.render(articles);
 };
 
+const controlAddShoppingListItem = function (itemName) {
+  console.log(itemName);
+  const article = getArticleByName(itemName);
+  if (!article) return;
+  if (getShoppingListItemByName(itemName)) return;
+  addArticleToShoppingList(article);
+  console.log(shoppingListData.shoppingList);
+  sortByShop();
+  shoppingListView.render(shoppingListData.shoppingList);
+};
+
 const init = async function () {
   await loadData();
   console.log(shoppingListData);
@@ -62,5 +78,6 @@ const init = async function () {
 
   searchView.addHandlerFocusIn(controlSearchFieldFocusIn);
   searchView.addHandlerKeyPress(controlSearchFieldKeyPress);
+  searchView.addHandlerButtonPress(controlAddShoppingListItem);
 };
 init();
