@@ -1,8 +1,14 @@
-Implement quantity handling
-Improve quantity display
+CURRENT:
+
+- color unordered - new class in CSS added, need to add some flag for shopping list item maybe?
+
+###
+
+Implement quantity handling - DONE
+Improve quantity display - DONE
 Work on mobile display
 
-push data to server when changing data
+push data to server when changing data - DONE
 
 add message for empty list
 
@@ -10,15 +16,15 @@ Add removing shopping list item
 
 Implement category modification
 
-Implement articles list dropdown
+Implement articles list dropdown - DONE
 Implement articles list window
-Implement adding articles
+Implement adding articles - DONE
 
 Implement adding new article
 
 Implement shop changing
 
-Implement clearing whole list
+Implement clearing whole list - PARTIALLY DONE, missing save to server
 
 Implement order change (drag and drop)
 

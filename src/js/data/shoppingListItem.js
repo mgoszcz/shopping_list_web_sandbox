@@ -51,3 +51,7 @@ export const sortByShop = function () {
   shoppingListData.shoppingList = unorderedItems;
   return;
 };
+
+export const deleteAllItems = function () {
+  shoppingListData.shoppingList = [];
+};

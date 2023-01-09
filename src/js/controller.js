@@ -19,9 +19,11 @@ import searchView from './views/searchView.js';
 import { filterArticles, getArticleByName } from './data/shoppingArticles.js';
 import {
   addArticleToShoppingList,
+  deleteAllItems,
   getShoppingListItemByName,
   sortByShop,
 } from './data/shoppingListItem.js';
+import menuView from './views/menuView.js';
 
 console.log('sandbox');
 
@@ -63,6 +65,12 @@ const controlAddShoppingListItem = function (itemName) {
   console.log(shoppingListData.shoppingList);
   sortByShop();
   shoppingListView.render(shoppingListData.shoppingList);
+  saveData();
+};
+
+const controlDeleteAll = function () {
+  deleteAllItems();
+  shoppingListView.render(shoppingListData.shoppingList);
 };
 
 const init = async function () {
@@ -79,5 +87,6 @@ const init = async function () {
   searchView.addHandlerFocusIn(controlSearchFieldFocusIn);
   searchView.addHandlerKeyPress(controlSearchFieldKeyPress);
   searchView.addHandlerButtonPress(controlAddShoppingListItem);
+  menuView.addHandlerDeleteAll(controlDeleteAll);
 };
 init();

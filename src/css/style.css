@@ -3,6 +3,7 @@
 
   --color-list-item-light: #f0dbdb;
   --color-list-item-light-hovered: #f0d1d1;
+  --color-list-item-unordered-light: #e97b7b;
 
   --color-search-light: #f5ebe0;
 
@@ -133,6 +134,10 @@ input::-webkit-inner-spin-button {
   opacity: 50%;
 }
 
+.list-item-unordered {
+  background-color: var(--color-list-item-unordered-light);
+}
+
 .list-item-button:hover {
   opacity: 100%;
 }
@@ -149,7 +154,7 @@ input::-webkit-inner-spin-button {
 .add-item-dropdown {
   position: absolute;
   width: 50%;
-  height: 50%;
+  height: 0px;
   display: inline-block;
 }
 
@@ -187,4 +192,34 @@ input::-webkit-inner-spin-button {
 
 .dropdown__article:hover {
   background-color: lightgray;
+}
+
+.menu-buttons {
+  display: flex;
+  margin: 0.3rem;
+  background-color: var(--color-search-light);
+  width: 50%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu-button {
+  display: flex;
+  margin: 0.5rem;
+  padding: 1rem;
+  background-color: var(--color-search-light);
+}
+
+.menu-button:hover {
+  background-color: #d89650;
+}
+
+.menu-item-icon {
+  height: 1.5rem;
+  padding: 0.5rem;
+}
+
+.menu-item-label {
+  font-size: 1.5rem;
+  padding: 0.5rem;
 }

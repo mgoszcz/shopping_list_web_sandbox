@@ -51,6 +51,7 @@ class SearchView {
     e.preventDefault();
     const searchFieldValue = this._searchEntry.value;
     this._addButtonHandler(searchFieldValue);
+    this._searchEntry.value = '';
   }
 
   dropdownSelectItem(e) {
@@ -76,6 +77,7 @@ class SearchView {
   displayDropdown() {
     console.log('display');
     this._dropdown.classList.remove('hidden');
+    this._dropdownDiv.style.height = '50%';
   }
 
   async hideDropdown(e) {
@@ -89,6 +91,7 @@ class SearchView {
     if (!this._dropdown.classList.contains('hidden')) {
       console.log('add hidden');
       this._dropdown.classList.add('hidden');
+      this._dropdownDiv.style.height = '0px';
     }
   }
 
