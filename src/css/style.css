@@ -223,3 +223,30 @@ input::-webkit-inner-spin-button {
   font-size: 1.5rem;
   padding: 0.5rem;
 }
+
+@media only screen and (max-width: 980px) {
+  .container {
+    width: 100%;
+  }
+
+  .shooping-list-item {
+    width: 150%;
+    display: inline-block;
+  }
+
+  body {
+    width: 100%;
+  }
+
+  .header {
+    width: 100%;
+  }
+
+  .add-item-dropdown {
+    width: 100%;
+  }
+
+  .menu-buttons {
+    width: 150%;
+  }
+}
