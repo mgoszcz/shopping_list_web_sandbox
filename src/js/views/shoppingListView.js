@@ -32,7 +32,9 @@ class ShoppingListView {
     const markup = this._data
       .map(item => {
         return `
-        <li class="shooping-list-item" data-id="${item.id}">
+        <li class="shooping-list-item ${
+          item.ordered ? '' : 'list-item-unordered'
+        }" data-id="${item.id}">
           <div class="list-item-content ${item.checked ? 'checked-item' : ''}">
             <div class="item-label-container">
               <span class="item-label">${item.article.name}</span>

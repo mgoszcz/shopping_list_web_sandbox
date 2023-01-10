@@ -9,6 +9,7 @@ export default class ShoppingListItem {
     this.amount = amount;
     this.checked = checked;
     this.id = generateShoppingListItemId(this.article.name);
+    this.ordered = false;
   }
 }
 
@@ -47,6 +48,8 @@ export const sortByShop = function () {
     item => !orderedItems.includes(item)
   );
   console.log(unorderedItems[0]);
+  orderedItems.forEach(item => (item.ordered = true));
+  unorderedItems.forEach(item => (item.ordered = false));
   unorderedItems.push(...orderedItems);
   shoppingListData.shoppingList = unorderedItems;
   return;

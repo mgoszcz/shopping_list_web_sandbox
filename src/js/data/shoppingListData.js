@@ -1,6 +1,6 @@
 import { apiGet, apiPost } from './api';
 import Shop from './shop';
-import ShoppingListItem from './shoppingListItem';
+import ShoppingListItem, { sortByShop } from './shoppingListItem';
 import { ShoppingArticle } from './shoppingArticles';
 
 const removeDiacritics = require('diacritics').remove;
@@ -88,6 +88,7 @@ export const saveDataToJSON = function () {
 export const loadData = async function () {
   const { shopping_list } = await apiGet();
   loadDataFromJSON(shopping_list);
+  sortByShop();
 };
 
 export const saveData = async function () {
