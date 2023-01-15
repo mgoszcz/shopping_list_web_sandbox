@@ -49,15 +49,18 @@
           <img class="menu-item-icon" src="./src/icons/list.png" />
         </div>
         <div class="menu-shop-button menu-button">
-          <span class="menu-item-label">Current Shop</span>
-          <img class="menu-item-icon" src="./src/icons/store.png" />
+          <div class="shop-label-container">
+            <span class="menu-item-label current-shop-label">Current Shop</span>
+            <img class="menu-item-icon" src="./src/icons/store.png" />
+          </div>
+          <span class="current-shop-name"></span>
         </div>
       </div>
     </div>
     <div class="shopping-list-container">
       <ul class="shopping-list">
         <li class="shooping-list-item">
-          <div class="list-item-content">
+          <div class="shopping-list-item-container list-item-content">
             <div class="item-label-container">
               <span class="item-label">banany</span>
             </div>
@@ -90,7 +93,9 @@
           </div>
         </li>
         <li class="shooping-list-item">
-          <div class="list-item-content checked-item">
+          <div
+            class="shopping-list-item-container list-item-content checked-item"
+          >
             <div class="item-label-container">
               <span class="item-label">jabłka</span>
             </div>
@@ -114,7 +119,7 @@
           </div>
         </li>
         <li class="shooping-list-item">
-          <div class="list-item-content">
+          <div class="shopping-list-item-container list-item-content">
             <div class="item-label-container">
               <span class="item-label">mleko</span>
             </div>
@@ -138,6 +143,43 @@
           </div>
         </li>
       </ul>
+    </div>
+    <div class="overlay hidden"></div>
+    <div class="categories-window hidden">
+      <div class="window-title">
+        <span class="window-title-text">Select category</span>
+        <button class="btn--close-modal">&times;</button>
+      </div>
+      <img
+        class="categories__add-category-button"
+        src="./src/icons/plus.png"
+        alt="Add"
+      />
+      <div class="categories__list-container">
+        <ul class="categories__list">
+          <li class="categories__list-item">
+            <div class="categories__category_item list-item-content">
+              <div class="category-label-container">
+                <span class="categories__category_name">Item</span>
+              </div>
+              <div class="edit-category-container">
+                <img
+                  class="edit-category-button list-item-button"
+                  src="./src/icons/draw.png"
+                  alt="Edit"
+                />
+              </div>
+              <div class="remove-category-container">
+                <img
+                  class="remove-category-button list-item-button"
+                  src="./src/icons/delete.png"
+                  alt="Delete"
+                />
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   </body>
 </html>

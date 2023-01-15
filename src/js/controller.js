@@ -24,6 +24,7 @@ import {
   sortByShop,
 } from './data/shoppingListItem.js';
 import menuView from './views/menuView.js';
+import categoriesView from './views/categoriesView.js';
 
 console.log('sandbox');
 
@@ -73,10 +74,25 @@ const controlDeleteAll = function () {
   shoppingListView.render(shoppingListData.shoppingList);
 };
 
+const controlOpenCategoryView = function (id) {
+  categoriesView.render(shoppingListData.categories);
+  categoriesView.showWindow(id);
+};
+
+const controlSelectCategory = function (id, categoryName) {
+  const shoppingListItem = getShoppingListItemById(id);
+  shoppingListItem.article.category = categoryName;
+  shoppingListView.render(shoppingListData.shoppingList);
+  categoriesView.hideWindow();
+};
+
 const init = async function () {
   await loadData();
   console.log(shoppingListData);
 
+  menuView.displayCurrentShop(shoppingListData.currentShop.name);
+
+  shoppingListView.setCategoryHandler(controlOpenCategoryView);
   shoppingListView.render(shoppingListData.shoppingList);
 
   shoppingListView.addHandlerClickItem(controlClickItem);
@@ -88,5 +104,7 @@ const init = async function () {
   searchView.addHandlerKeyPress(controlSearchFieldKeyPress);
   searchView.addHandlerButtonPress(controlAddShoppingListItem);
   menuView.addHandlerDeleteAll(controlDeleteAll);
+
+  categoriesView.addHandlerSelectItem(controlSelectCategory);
 };
 init();

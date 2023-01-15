@@ -5,15 +5,38 @@ class ShoppingListView {
   _data;
   _parentElement = document.querySelector('.shopping-list');
   _quantity_input = document.querySelector('.amount-spinner');
+  _categoryHandler;
+  // _categoryButton = document.querySelector('.category-label');
 
   addHandlerClickItem(handler) {
-    this._parentElement.addEventListener('click', function (e) {
-      console.log(`addHandlerClickItem: ${e.target}`);
-      if (e.target.classList.contains('amount-spinner')) return;
-      const item = e.target.closest('.shooping-list-item');
-      if (!item) return;
-      handler(item.dataset.id);
-    });
+    this._parentElement.addEventListener(
+      'click',
+      function (e) {
+        console.log(`addHandlerClickItem: ${e.target}`);
+        if (e.target.classList.contains('amount-spinner')) return;
+        if (e.target.classList.contains('category-label')) {
+          this.selectCategory(e.target);
+          return;
+        }
+        const item = e.target.closest('.shooping-list-item');
+        if (!item) return;
+        handler(item.dataset.id);
+      }.bind(this)
+    );
+  }
+
+  selectCategory(target) {
+    this._categoryHandler(target.closest('.shooping-list-item').dataset.id);
+  }
+
+  setCategoryHandler(handler) {
+    this._categoryHandler = handler;
+  }
+
+  addHandlerSelectCategory() {
+    console.log(this._categoryHandler);
+    const categoryButton = this._parentElement.querySelector('.category-label');
+    categoryButton.addEventListener('click', this._categoryHandler);
   }
 
   addHandlerSetQuantity(handler) {
@@ -35,7 +58,9 @@ class ShoppingListView {
         <li class="shooping-list-item ${
           item.ordered ? '' : 'list-item-unordered'
         }" data-id="${item.id}">
-          <div class="list-item-content ${item.checked ? 'checked-item' : ''}">
+          <div class="shopping-list-item-container list-item-content ${
+            item.checked ? 'checked-item' : ''
+          }">
             <div class="item-label-container">
               <span class="item-label">${item.article.name}</span>
             </div>

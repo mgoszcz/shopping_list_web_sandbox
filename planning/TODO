@@ -1,6 +1,6 @@
 CURRENT:
 
-- color unordered - new class in CSS added, need to add some flag for shopping list item maybe?
+add save on delete all and category change
 
 ###
 
@@ -14,7 +14,13 @@ add message for empty list
 
 Add removing shopping list item
 
-Implement category modification
+Implement category modification - PARTIALLY
+implement categories window
+implement rendering categories - DONE
+implement categories selection - DONE
+implement adding new category
+implement removing category
+implement editing category
 
 Implement articles list dropdown - DONE
 Implement articles list window
