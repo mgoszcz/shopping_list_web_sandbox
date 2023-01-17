@@ -72,6 +72,7 @@ const controlAddShoppingListItem = function (itemName) {
 const controlDeleteAll = function () {
   deleteAllItems();
   shoppingListView.render(shoppingListData.shoppingList);
+  saveData();
 };
 
 const controlOpenCategoryView = function (id) {
@@ -82,8 +83,10 @@ const controlOpenCategoryView = function (id) {
 const controlSelectCategory = function (id, categoryName) {
   const shoppingListItem = getShoppingListItemById(id);
   shoppingListItem.article.category = categoryName;
+  sortByShop();
   shoppingListView.render(shoppingListData.shoppingList);
   categoriesView.hideWindow();
+  saveData();
 };
 
 const init = async function () {

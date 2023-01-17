@@ -314,7 +314,7 @@ input::-webkit-inner-spin-button {
 }
 
 .category-label-container {
-  width: 85%;
+  width: 95%;
   margin-left: 0.5rem;
   height: 100%;
 }
@@ -350,4 +350,25 @@ input::-webkit-inner-spin-button {
   position: absolute;
   top: 1rem;
   left: 1rem;
+}
+
+.new-category-item {
+  background-color: #d3d3d3ae;
+}
+
+.categories__new_category_name {
+  width: 90%;
+  font-size: 1.5rem;
+  position: relative;
+  top: 15%;
+  border-style: none;
+  background-color: lightgrey;
+}
+
+.categories__new_category_name:focus {
+  outline: none;
+}
+
+.new-category-item:hover {
+  background-color: #d3d3d3ae;
 }
