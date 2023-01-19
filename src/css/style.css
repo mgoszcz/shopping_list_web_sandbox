@@ -352,17 +352,23 @@ input::-webkit-inner-spin-button {
   left: 1rem;
 }
 
+.new-category-form {
+  width: 95%;
+  height: 100%;
+  display: flex;
+}
+
 .new-category-item {
-  background-color: #d3d3d3ae;
+  background-color: #d3d3d377;
 }
 
 .categories__new_category_name {
-  width: 90%;
+  width: 100%;
   font-size: 1.5rem;
   position: relative;
   top: 15%;
   border-style: none;
-  background-color: lightgrey;
+  background-color: #d3d3d3d6;
 }
 
 .categories__new_category_name:focus {
@@ -370,5 +376,19 @@ input::-webkit-inner-spin-button {
 }
 
 .new-category-item:hover {
-  background-color: #d3d3d3ae;
+  background-color: #d3d3d377;
+}
+
+.category-button {
+  opacity: 0.5;
+  cursor: pointer;
+  border: none;
+}
+
+.category-button:hover {
+  transform: scale(1.05);
+}
+
+.button-image {
+  height: 1.5rem;
 }

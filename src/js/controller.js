@@ -25,6 +25,10 @@ import {
 } from './data/shoppingListItem.js';
 import menuView from './views/menuView.js';
 import categoriesView from './views/categoriesView.js';
+import {
+  editCategoryName,
+  removeUnusedCategories,
+} from './data/categoriesList.js';
 
 console.log('sandbox');
 
@@ -83,10 +87,28 @@ const controlOpenCategoryView = function (id) {
 const controlSelectCategory = function (id, categoryName) {
   const shoppingListItem = getShoppingListItemById(id);
   shoppingListItem.article.category = categoryName;
+  removeUnusedCategories();
   sortByShop();
   shoppingListView.render(shoppingListData.shoppingList);
   categoriesView.hideWindow();
   saveData();
+};
+
+const controlAddCategory = function (newCategory) {
+  if (!newCategory) return false;
+  if (shoppingListData.categories.includes(newCategory)) return false;
+  shoppingListData.categories.push(newCategory);
+  shoppingListData.categories.sort();
+  categoriesView.render(shoppingListData.categories);
+  return true;
+};
+
+const controlEditCategoryName = function (oldName, newName) {
+  if (shoppingListData.categories.includes(newName)) return false;
+  editCategoryName(oldName, newName);
+  shoppingListView.render(shoppingListData.shoppingList);
+  categoriesView.render(shoppingListData.categories);
+  return true;
 };
 
 const init = async function () {
@@ -109,5 +131,7 @@ const init = async function () {
   menuView.addHandlerDeleteAll(controlDeleteAll);
 
   categoriesView.addHandlerSelectItem(controlSelectCategory);
+  categoriesView.registerAddCategoryHandler(controlAddCategory);
+  categoriesView.registerEditCategoryHandler(controlEditCategoryName);
 };
 init();

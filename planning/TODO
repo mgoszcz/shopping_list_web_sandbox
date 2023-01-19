@@ -1,8 +1,6 @@
 CURRENT:
 
-add new category
-
-remove category if not needed
+editing category tests
 
 ###
 
@@ -17,12 +15,12 @@ add message for empty list
 Add removing shopping list item
 
 Implement category modification - PARTIALLY
-implement categories window
+implement categories window - DONE
 implement rendering categories - DONE
 implement categories selection - DONE
-implement adding new category
-implement removing category
-implement editing category
+implement adding new category - DONE
+implement removing category - DONE
+implement editing category - DONE - consider more testing
 
 Implement articles list dropdown - DONE
 Implement articles list window
