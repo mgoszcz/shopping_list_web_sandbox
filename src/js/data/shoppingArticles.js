@@ -14,18 +14,22 @@ export class ShoppingArticle {
 
 export const filterArticles = function (filterText) {
   const result = shoppingListData.shoppingArticlesList.filter(
-    item => item.name === filterText
+    item => item.name.toLowerCase() === filterText.toLowerCase()
   );
   result.push(
     ...shoppingListData.shoppingArticlesList.filter(
-      item => !result.includes(item) && item.name.includes(filterText)
+      item =>
+        !result.includes(item) &&
+        item.name.toLowerCase().includes(filterText.toLowerCase())
     )
   );
   result.push(
     ...shoppingListData.shoppingArticlesList.filter(
       item =>
         !result.includes(item) &&
-        removeDiacritics(item.name).includes(removeDiacritics(filterText))
+        removeDiacritics(item.name)
+          .toLowerCase()
+          .includes(removeDiacritics(filterText.toLowerCase()))
     )
   );
   return result;
