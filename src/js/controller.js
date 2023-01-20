@@ -108,6 +108,7 @@ const controlEditCategoryName = function (oldName, newName) {
   editCategoryName(oldName, newName);
   shoppingListView.render(shoppingListData.shoppingList);
   categoriesView.render(shoppingListData.categories);
+  saveData();
   return true;
 };
 

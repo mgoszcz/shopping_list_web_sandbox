@@ -18,7 +18,7 @@ export const removeUnusedCategories = function () {
 
 export const editCategoryName = function (oldName, newName) {
   shoppingListData.categories.push(newName);
-  shoppingListData.categories.sort;
+  shoppingListData.categories.sort();
   shoppingListData.categories.splice(
     shoppingListData.categories.indexOf(oldName),
     1
