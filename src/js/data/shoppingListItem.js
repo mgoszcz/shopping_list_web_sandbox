@@ -1,5 +1,6 @@
 import {
   generateShoppingListItemId,
+  getShoppingListItemById,
   shoppingListData,
 } from './shoppingListData';
 
@@ -57,4 +58,12 @@ export const sortByShop = function () {
 
 export const deleteAllItems = function () {
   shoppingListData.shoppingList = [];
+};
+
+export const deleteItem = function (itemId) {
+  const itemToRemove = getShoppingListItemById(itemId);
+  shoppingListData.shoppingList.splice(
+    shoppingListData.shoppingList.indexOf(itemToRemove),
+    1
+  );
 };

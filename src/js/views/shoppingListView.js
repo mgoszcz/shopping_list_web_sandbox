@@ -6,6 +6,7 @@ class ShoppingListView {
   _parentElement = document.querySelector('.shopping-list');
   _quantity_input = document.querySelector('.amount-spinner');
   _categoryHandler;
+  _removeItemHandler;
   // _categoryButton = document.querySelector('.category-label');
 
   addHandlerClickItem(handler) {
@@ -16,6 +17,10 @@ class ShoppingListView {
         if (e.target.classList.contains('amount-spinner')) return;
         if (e.target.classList.contains('category-label')) {
           this.selectCategory(e.target);
+          return;
+        }
+        if (e.target.closest('.delete-button-container')) {
+          this.removeItem(e.target);
           return;
         }
         const item = e.target.closest('.shooping-list-item');
@@ -33,6 +38,10 @@ class ShoppingListView {
     this._categoryHandler = handler;
   }
 
+  registerRemoveItemHandler(handler) {
+    this._removeItemHandler = handler;
+  }
+
   addHandlerSelectCategory() {
     console.log(this._categoryHandler);
     const categoryButton = this._parentElement.querySelector('.category-label');
@@ -47,6 +56,11 @@ class ShoppingListView {
       const container = e.target.closest('.shooping-list-item');
       handler(container.dataset.id, item.value);
     });
+  }
+
+  removeItem(item) {
+    const id = item.closest('.shooping-list-item').dataset.id;
+    this._removeItemHandler(id);
   }
 
   render(data) {

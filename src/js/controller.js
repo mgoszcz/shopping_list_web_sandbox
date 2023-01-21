@@ -20,6 +20,7 @@ import { filterArticles, getArticleByName } from './data/shoppingArticles.js';
 import {
   addArticleToShoppingList,
   deleteAllItems,
+  deleteItem,
   getShoppingListItemByName,
   sortByShop,
 } from './data/shoppingListItem.js';
@@ -69,6 +70,12 @@ const controlAddShoppingListItem = function (itemName) {
   addArticleToShoppingList(article);
   console.log(shoppingListData.shoppingList);
   sortByShop();
+  shoppingListView.render(shoppingListData.shoppingList);
+  saveData();
+};
+
+const controlRemoveShoppingListItem = function (id) {
+  deleteItem(id);
   shoppingListView.render(shoppingListData.shoppingList);
   saveData();
 };
@@ -123,6 +130,7 @@ const init = async function () {
 
   shoppingListView.addHandlerClickItem(controlClickItem);
   shoppingListView.addHandlerSetQuantity(controlQuantityChange);
+  shoppingListView.registerRemoveItemHandler(controlRemoveShoppingListItem);
 
   searchView.render(shoppingListData.shoppingArticlesList);
 
