@@ -16,8 +16,12 @@ import {
 } from './data/shoppingListData.js';
 import shoppingListView from './views/shoppingListView.js';
 import searchView from './views/searchView.js';
-import { filterArticles, getArticleByName } from './data/shoppingArticles.js';
 import {
+  filterArticles,
+  getArticleByName,
+  ShoppingArticle,
+} from './data/shoppingArticles.js';
+import ShoppingListItem, {
   addArticleToShoppingList,
   deleteAllItems,
   deleteItem,
@@ -65,13 +69,30 @@ const controlSearchFieldKeyPress = function (filterText) {
 const controlAddShoppingListItem = function (itemName) {
   console.log(itemName);
   const article = getArticleByName(itemName);
-  if (!article) return;
+  if (!article) {
+    shoppingListView.renderNewItem(itemName);
+    return;
+  }
   if (getShoppingListItemByName(itemName)) return;
   addArticleToShoppingList(article);
   console.log(shoppingListData.shoppingList);
   sortByShop();
   shoppingListView.render(shoppingListData.shoppingList);
   saveData();
+};
+
+const controlCreateNewItem = function (itemName, category) {
+  if (getShoppingListItemByName(itemName)) return;
+  if (getArticleByName(itemName))
+    throw new Error(
+      `Article ${itemName} already exists on shopping articles list`
+    );
+  const shoppingArticle = new ShoppingArticle(itemName, category);
+  shoppingListData.shoppingArticlesList.push(shoppingArticle);
+  const shoppingListItem = new ShoppingListItem(shoppingArticle);
+  shoppingListData.shoppingList.push(shoppingListItem);
+  sortByShop();
+  shoppingListView.render(shoppingListData.shoppingList);
 };
 
 const controlRemoveShoppingListItem = function (id) {
@@ -92,6 +113,11 @@ const controlOpenCategoryView = function (id) {
 };
 
 const controlSelectCategory = function (id, categoryName) {
+  if (id === 'NewShoppingListItem') {
+    shoppingListView.setNewItemCategory(categoryName);
+    categoriesView.hideWindow();
+    return;
+  }
   const shoppingListItem = getShoppingListItemById(id);
   shoppingListItem.article.category = categoryName;
   removeUnusedCategories();
@@ -131,6 +157,7 @@ const init = async function () {
   shoppingListView.addHandlerClickItem(controlClickItem);
   shoppingListView.addHandlerSetQuantity(controlQuantityChange);
   shoppingListView.registerRemoveItemHandler(controlRemoveShoppingListItem);
+  shoppingListView.registerSubmitItemHandler(controlCreateNewItem);
 
   searchView.render(shoppingListData.shoppingArticlesList);
 

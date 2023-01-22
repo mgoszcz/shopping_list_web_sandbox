@@ -35,6 +35,7 @@ class categoriesView {
   hideWindow() {
     this._parentElement.classList.add('hidden');
     this._overlay.classList.add('hidden');
+    this._editInProgress = false;
   }
 
   addHandlerSelectItem(handler) {
@@ -52,6 +53,7 @@ class categoriesView {
   }
 
   _selectItem(item, handler) {
+    if (this._editInProgress) return;
     handler(
       this._shoppingListItemId,
       item.querySelector('.categories__category_name').textContent
@@ -66,12 +68,12 @@ class categoriesView {
     const oldCategoryName = listItem.dataset.name;
     console.log(oldCategoryName);
     const markup = `
-        <div class="categories__category_item list-item-content new-category-item">
-            <form class="new-category-form">    
+        <div class="categories__category_item list-item-content new-list-item">
+            <form class="new-item-form">    
                 <div class="category-label-container">
-                    <input class="categories__new_category_name"></input>
+                    <input class="new-item-name new-category-input"></input>
                 </div>
-                <button class="confirm-category-button category-button">
+                <button class="confirm-item-button category-button">
                     <img
                     class="button-image"
                     src="${confirmIcon}"
@@ -90,7 +92,7 @@ class categoriesView {
     `;
     listItem.innerHTML = '';
     listItem.insertAdjacentHTML('afterbegin', markup);
-    const input = document.querySelector('.categories__new_category_name');
+    const input = document.querySelector('.new-item-name');
     input.value = oldCategoryName;
     input.focus();
     input.select();
@@ -107,11 +109,11 @@ class categoriesView {
   }
 
   addHandlerEditCategory(oldCategoryName) {
-    document.querySelector('.new-category-form').addEventListener(
+    document.querySelector('.new-item-form').addEventListener(
       'submit',
       function (e) {
         e.preventDefault();
-        const input = document.querySelector('.categories__new_category_name');
+        const input = document.querySelector('.new-item-name');
         const newCategoryName = input.value;
         if (!newCategoryName) return;
         if (newCategoryName === oldCategoryName) return;
@@ -124,8 +126,8 @@ class categoriesView {
   }
 
   addHandlerAddNewCategory() {
-    const form = document.querySelector('.new-category-form');
-    const input = document.querySelector('.categories__new_category_name');
+    const form = document.querySelector('.new-item-form');
+    const input = document.querySelector('.new-item-name');
     form.addEventListener(
       'submit',
       function (e) {
@@ -191,12 +193,12 @@ class categoriesView {
     this._editInProgress = true;
     const markup = `
         <li class="categories__list-item">
-        <div class="categories__category_item list-item-content new-category-item">
-            <form class="new-category-form">    
+        <div class="categories__category_item list-item-content new-list-item">
+            <form class="new-item-form">    
                 <div class="category-label-container">
-                    <input class="categories__new_category_name"></input>
+                    <input class="new-item-name new-category-input"></input>
                 </div>
-                <button class="confirm-category-button category-button">
+                <button class="confirm-item-button category-button">
                     <img
                     class="button-image"
                     src="${confirmIcon}"
@@ -215,9 +217,7 @@ class categoriesView {
     </li>
     `;
     this._categoriesList.insertAdjacentHTML('afterbegin', markup);
-    const newCategoryName = document.querySelector(
-      '.categories__new_category_name'
-    );
+    const newCategoryName = document.querySelector('.new-item-name');
     newCategoryName.focus();
     this.addHandlerAddNewCategory();
     this.addHandlerCancelButton();

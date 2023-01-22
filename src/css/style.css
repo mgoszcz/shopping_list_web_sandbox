@@ -352,30 +352,41 @@ input::-webkit-inner-spin-button {
   left: 1rem;
 }
 
-.new-category-form {
+.new-item-form {
   width: 95%;
   height: 100%;
   display: flex;
 }
 
-.new-category-item {
+.new-list-item {
   background-color: #d3d3d377;
+  position: relative;
+  z-index: 1000;
 }
 
-.categories__new_category_name {
-  width: 100%;
-  font-size: 1.5rem;
+.new-item-name {
   position: relative;
-  top: 15%;
   border-style: none;
   background-color: #d3d3d3d6;
 }
 
-.categories__new_category_name:focus {
+.new-category-input {
+  width: 100%;
+  font-size: 1.5rem;
+  top: 15%;
+}
+
+.new-list-item-input {
+  width: 95%;
+  font-size: 2rem;
+  top: 25%;
+}
+
+.new-item-name:focus {
   outline: none;
 }
 
-.new-category-item:hover {
+.new-list-item:hover {
   background-color: #d3d3d377;
 }
 

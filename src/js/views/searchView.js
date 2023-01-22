@@ -50,7 +50,9 @@ class SearchView {
     console.log(e);
     e.preventDefault();
     const searchFieldValue = this._searchEntry.value;
+    if (!searchFieldValue) return;
     this._addButtonHandler(searchFieldValue);
+    this._hideDropdown();
     this._searchEntry.value = '';
   }
 
@@ -59,7 +61,7 @@ class SearchView {
     console.log(item);
     if (item.classList.contains('dropdown__article')) {
       this._searchEntry.value = item.textContent;
-      this._dropdown.classList.add('hidden');
+      this._hideDropdown();
     }
   }
 
@@ -88,8 +90,11 @@ class SearchView {
       e.target !== this._dropdownDiv
     )
       return;
+    this._hideDropdown();
+  }
+
+  _hideDropdown() {
     if (!this._dropdown.classList.contains('hidden')) {
-      console.log('add hidden');
       this._dropdown.classList.add('hidden');
       this._dropdownDiv.style.height = '0px';
     }
