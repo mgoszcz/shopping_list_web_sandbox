@@ -8,6 +8,7 @@ class ShoppingListView {
   _parentElement = document.querySelector('.shopping-list');
   _quantity_input = document.querySelector('.amount-spinner');
   _overlayHard = document.querySelector('.overlay-hard');
+  _addingItemInProgress = false;
   _categoryHandler;
   _removeItemHandler;
   _submitItemHandler;
@@ -69,6 +70,7 @@ class ShoppingListView {
       'click',
       function (e) {
         console.log(e.target);
+        this._addingItemInProgress = false;
         this.render(this._data);
         this._overlayHard.classList.add('hidden');
       }.bind(this)
@@ -84,7 +86,16 @@ class ShoppingListView {
       function () {
         if (!itemName.value) return;
         if (categoryField.dataset.category === 'null') return;
-        this._submitItemHandler(itemName.value, categoryField.dataset.category);
+        this._addingItemInProgress = false;
+        if (
+          !this._submitItemHandler(
+            itemName.value,
+            categoryField.dataset.category
+          )
+        ) {
+          this._addingItemInProgress = true;
+          return;
+        }
         this._overlayHard.classList.add('hidden');
       }.bind(this)
     );
@@ -100,6 +111,7 @@ class ShoppingListView {
   }
 
   render(data) {
+    if (this._addingItemInProgress) return;
     this._data = data;
 
     const markup = this._data
@@ -177,13 +189,14 @@ class ShoppingListView {
     </li>
     `;
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
-    const input = document.querySelector('.new-item-name');
+    const input = document.querySelector('.new-list-item-input');
     input.value = newItemName;
     input.focus();
     input.select();
     this._addHandlerCancelItem();
     this._addHandlerSubmitItem();
     this._overlayHard.classList.remove('hidden');
+    this._addingItemInProgress = true;
   }
 
   setNewItemCategory(categoryName) {

@@ -82,17 +82,15 @@ const controlAddShoppingListItem = function (itemName) {
 };
 
 const controlCreateNewItem = function (itemName, category) {
-  if (getShoppingListItemByName(itemName)) return;
-  if (getArticleByName(itemName))
-    throw new Error(
-      `Article ${itemName} already exists on shopping articles list`
-    );
+  if (getShoppingListItemByName(itemName)) return false;
+  if (getArticleByName(itemName)) return false;
   const shoppingArticle = new ShoppingArticle(itemName, category);
   shoppingListData.shoppingArticlesList.push(shoppingArticle);
   const shoppingListItem = new ShoppingListItem(shoppingArticle);
   shoppingListData.shoppingList.push(shoppingListItem);
   sortByShop();
   shoppingListView.render(shoppingListData.shoppingList);
+  return true;
 };
 
 const controlRemoveShoppingListItem = function (id) {

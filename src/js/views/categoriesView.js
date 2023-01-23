@@ -92,7 +92,7 @@ class categoriesView {
     `;
     listItem.innerHTML = '';
     listItem.insertAdjacentHTML('afterbegin', markup);
-    const input = document.querySelector('.new-item-name');
+    const input = document.querySelector('.new-category-input');
     input.value = oldCategoryName;
     input.focus();
     input.select();
@@ -113,7 +113,7 @@ class categoriesView {
       'submit',
       function (e) {
         e.preventDefault();
-        const input = document.querySelector('.new-item-name');
+        const input = document.querySelector('.new-category-input');
         const newCategoryName = input.value;
         if (!newCategoryName) return;
         if (newCategoryName === oldCategoryName) return;
@@ -127,7 +127,7 @@ class categoriesView {
 
   addHandlerAddNewCategory() {
     const form = document.querySelector('.new-item-form');
-    const input = document.querySelector('.new-item-name');
+    const input = document.querySelector('.new-category-input');
     form.addEventListener(
       'submit',
       function (e) {
@@ -217,7 +217,7 @@ class categoriesView {
     </li>
     `;
     this._categoriesList.insertAdjacentHTML('afterbegin', markup);
-    const newCategoryName = document.querySelector('.new-item-name');
+    const newCategoryName = document.querySelector('.new-category-input');
     newCategoryName.focus();
     this.addHandlerAddNewCategory();
     this.addHandlerCancelButton();
