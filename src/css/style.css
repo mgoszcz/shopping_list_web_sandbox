@@ -328,6 +328,10 @@ input::-webkit-inner-spin-button {
   margin-right: 0.5rem;
 }
 
+.current-category {
+  background-color: lightgreen;
+}
+
 .categories__list {
   list-style: none;
   padding: 0 0.5rem;
@@ -374,6 +378,12 @@ input::-webkit-inner-spin-button {
   width: 100%;
   font-size: 1.5rem;
   top: 15%;
+}
+
+.error-input {
+  box-sizing: border-box;
+  border: 3px solid red;
+  outline: none;
 }
 
 .new-list-item-input {

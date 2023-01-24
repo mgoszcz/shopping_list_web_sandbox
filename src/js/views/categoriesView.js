@@ -12,7 +12,7 @@ class categoriesView {
   );
   _editInProgress = false;
   _data;
-  _shoppingListItemId;
+  _shoppingListItem;
   _addCategoryHandler;
   _editCategoryHandler;
 
@@ -25,11 +25,11 @@ class categoriesView {
     );
   }
 
-  showWindow(itemId) {
+  showWindow(shoppingListItem) {
     this._parentElement.classList.remove('hidden');
     this._overlay.classList.remove('hidden');
-    this._shoppingListItemId = itemId;
-    console.log(this._shoppingListItemId);
+    this._shoppingListItem = shoppingListItem;
+    console.log(this._shoppingListItem);
   }
 
   hideWindow() {
@@ -54,10 +54,13 @@ class categoriesView {
 
   _selectItem(item, handler) {
     if (this._editInProgress) return;
-    handler(
-      this._shoppingListItemId,
-      item.querySelector('.categories__category_name').textContent
-    );
+    console.log(`select, item: ${this._shoppingListItem}`);
+    console.log(`select, optional: ${this._shoppingListItem?.id}`);
+    const id =
+      this._shoppingListItem !== 'NewShoppingListItem'
+        ? this._shoppingListItem.id
+        : this._shoppingListItem;
+    handler(id, item.querySelector('.categories__category_name').textContent);
   }
 
   _editItem(item, handler) {
@@ -115,10 +118,18 @@ class categoriesView {
         e.preventDefault();
         const input = document.querySelector('.new-category-input');
         const newCategoryName = input.value;
-        if (!newCategoryName) return;
-        if (newCategoryName === oldCategoryName) return;
-        if (!this._editCategoryHandler(oldCategoryName, newCategoryName))
+        if (!newCategoryName) {
+          input.classList.add('error-input');
           return;
+        }
+        if (newCategoryName === oldCategoryName) {
+          input.classList.add('error-input');
+          return;
+        }
+        if (!this._editCategoryHandler(oldCategoryName, newCategoryName)) {
+          input.classList.add('error-input');
+          return;
+        }
         this.findCategoryAndScroll(newCategoryName);
         this._editInProgress = false;
       }.bind(this)
@@ -135,6 +146,7 @@ class categoriesView {
         const newCategory = input.value;
         if (!this._addCategoryHandler(newCategory)) {
           console.log('Insert correct category name');
+          input.classList.add('error-input');
           return;
         }
         this.findCategoryAndScroll(newCategory);
@@ -164,11 +176,14 @@ class categoriesView {
 
   render(data) {
     this._data = data;
+    const currentCategory = this._shoppingListItem.article?.category;
     const markup = this._data
       .map(item => {
         return `
             <li class="categories__list-item" data-name="${item}">
-                <div class="categories__category_item list-item-content">
+                <div class="categories__category_item list-item-content ${
+                  item === currentCategory ? 'current-category' : ''
+                }">
                     <div class="category-label-container">
                         <span class="categories__category_name">${item}</span>
                     </div>
@@ -186,6 +201,11 @@ class categoriesView {
       .join('');
     this._clearList();
     this._categoriesList.insertAdjacentHTML('afterbegin', markup);
+    if (currentCategory) {
+      this.findCategoryAndScroll(currentCategory);
+    } else {
+      this._categoriesList.scrollTo(0, 0);
+    }
   }
 
   newCategoryField() {

@@ -106,8 +106,12 @@ const controlDeleteAll = function () {
 };
 
 const controlOpenCategoryView = function (id) {
+  console.log(id);
+  const shoppingListItem =
+    id !== 'NewShoppingListItem' ? getShoppingListItemById(id) : id;
+  console.log(shoppingListItem);
+  categoriesView.showWindow(shoppingListItem);
   categoriesView.render(shoppingListData.categories);
-  categoriesView.showWindow(id);
 };
 
 const controlSelectCategory = function (id, categoryName) {

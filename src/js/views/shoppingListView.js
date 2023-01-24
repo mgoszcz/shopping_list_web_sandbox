@@ -47,12 +47,6 @@ class ShoppingListView {
     this._removeItemHandler = handler;
   }
 
-  addHandlerSelectCategory() {
-    console.log(this._categoryHandler);
-    const categoryButton = this._parentElement.querySelector('.category-label');
-    categoryButton.addEventListener('click', this._categoryHandler);
-  }
-
   addHandlerSetQuantity(handler) {
     const input = this._parentElement.querySelector('.amount-spinner');
     this._parentElement.addEventListener('change', function (e) {
