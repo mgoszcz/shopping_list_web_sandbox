@@ -442,3 +442,36 @@ input::-webkit-inner-spin-button {
 .articles__add-article-button {
   margin-top: 0.5rem;
 }
+
+.close-message {
+  top: 0.1rem;
+  right: 0.1rem;
+  font-size: 1.5rem;
+}
+
+.message-box {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 15%;
+  background-color: red;
+  z-index: 1000;
+}
+
+.message-title {
+  height: 2rem;
+}
+
+.message-title-text {
+  font-size: 1.5rem;
+  position: absolute;
+  top: 0.1rem;
+  left: 0.5rem;
+}
+
+.message-text-container {
+  font-size: 1.5rem;
+  color: white;
+  margin: 0.5rem;
+}
