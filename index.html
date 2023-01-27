@@ -152,7 +152,7 @@
         <button class="btn--close-modal">&times;</button>
       </div>
       <img
-        class="categories__add-category-button"
+        class="add-button categories__add-category-button"
         src="./src/icons/plus.png"
         alt="Add"
       />
@@ -178,6 +178,48 @@
                 />
               </div>
             </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="articles-window hidden">
+      <div class="window-title">
+        <span class="window-title-text">Articles</span>
+        <button class="btn--close-modal">&times;</button>
+      </div>
+      <div class="add-new-article-container list-item-content new-list-item">
+        <img
+          class="add-button articles__add-article-button"
+          src="./src/icons/plus.png"
+          alt="Add"
+        />
+        <div class="new-article-fields">
+          <div class="item-label-container">
+            <input class="new-item-name new-article-input"></input>
+          </div>
+          <div class="category-container">
+            <span class="category-label new-article-category" data-category=null>Select category...</span>
+          </div>
+          <div class="confirm-item-button">
+              <img
+              class="list-item-button"
+              src="./src/icons/check-mark.png"
+              alt="Confirm"
+              />
+          </div>
+          <div class="cancel-button">
+              <img
+              class="list-item-button"
+              src="./src/icons/cancel.png"
+              alt="Cancel"
+              />
+          </div>
+        </div>
+      </div>
+      <div class="articles-list-container">
+        <ul class="articles-list">
+          <li class="'articles-list-item">
+
           </li>
         </ul>
       </div>

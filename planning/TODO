@@ -1,10 +1,9 @@
 CURRENT:
 
-add new item - testing
-add new item - save data
-
 error in adding ctageory - done
 error in adding item - todo - input and category
+
+articles window
 
 ###
 
@@ -16,7 +15,7 @@ push data to server when changing data - DONE
 
 add message for empty list
 
-Add removing shopping list item
+Add removing shopping list item - DONE
 
 Implement category modification - DONE
 implement categories window - DONE
@@ -30,7 +29,9 @@ Implement articles list dropdown - DONE
 Implement articles list window
 Implement adding articles - DONE
 
-Implement adding new article
+Implement adding new article - DONE
+
+Implement editing article
 
 Implement shop changing
 

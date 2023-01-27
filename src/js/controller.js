@@ -90,6 +90,7 @@ const controlCreateNewItem = function (itemName, category) {
   shoppingListData.shoppingList.push(shoppingListItem);
   sortByShop();
   shoppingListView.render(shoppingListData.shoppingList);
+  saveData();
   return true;
 };
 
