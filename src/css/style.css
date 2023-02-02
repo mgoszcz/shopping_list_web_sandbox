@@ -455,7 +455,7 @@ input::-webkit-inner-spin-button {
   right: 0;
   width: 20%;
   height: 15%;
-  background-color: red;
+  background-image: linear-gradient(to right bottom, #f98080, #ff1100);
   z-index: 1000;
 }
 
@@ -468,10 +468,15 @@ input::-webkit-inner-spin-button {
   position: absolute;
   top: 0.1rem;
   left: 0.5rem;
+  color: #d9e8e8;
 }
 
 .message-text-container {
   font-size: 1.5rem;
-  color: white;
+  color: #d9e8e8;
   margin: 0.5rem;
+}
+
+.label-errored {
+  color: red;
 }

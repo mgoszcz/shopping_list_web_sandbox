@@ -82,8 +82,8 @@ const controlAddShoppingListItem = function (itemName) {
 };
 
 const controlCreateNewItem = function (itemName, category) {
-  if (getShoppingListItemByName(itemName)) return false;
-  if (getArticleByName(itemName)) return false;
+  if (getShoppingListItemByName(itemName)) return 1;
+  if (getArticleByName(itemName)) return 2;
   const shoppingArticle = new ShoppingArticle(itemName, category);
   shoppingListData.shoppingArticlesList.push(shoppingArticle);
   const shoppingListItem = new ShoppingListItem(shoppingArticle);
@@ -91,7 +91,7 @@ const controlCreateNewItem = function (itemName, category) {
   sortByShop();
   shoppingListView.render(shoppingListData.shoppingList);
   saveData();
-  return true;
+  return 0;
 };
 
 const controlRemoveShoppingListItem = function (id) {
@@ -131,7 +131,6 @@ const controlSelectCategory = function (id, categoryName) {
 };
 
 const controlAddCategory = function (newCategory) {
-  if (!newCategory) return false;
   if (shoppingListData.categories.includes(newCategory)) return false;
   shoppingListData.categories.push(newCategory);
   shoppingListData.categories.sort();

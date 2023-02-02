@@ -2,6 +2,7 @@ import moveIcon from 'url:../../icons/swap.png';
 import deleteIcon from 'url:../../icons/delete.png';
 import confirmIcon from 'url:../../icons/check-mark.png';
 import cancelIcon from 'url:../../icons/cancel.png';
+import { MessageBoxView } from './messageBoxView';
 
 class ShoppingListView {
   _data;
@@ -9,6 +10,7 @@ class ShoppingListView {
   _quantity_input = document.querySelector('.amount-spinner');
   _overlayHard = document.querySelector('.overlay-hard');
   _addingItemInProgress = false;
+  _messageBox = new MessageBoxView();
   _categoryHandler;
   _removeItemHandler;
   _submitItemHandler;
@@ -78,19 +80,42 @@ class ShoppingListView {
     submitButton.addEventListener(
       'click',
       function () {
-        if (!itemName.value) return;
-        if (categoryField.dataset.category === 'null') return;
-        this._addingItemInProgress = false;
-        if (
-          !this._submitItemHandler(
-            itemName.value,
-            categoryField.dataset.category
-          )
-        ) {
-          this._addingItemInProgress = true;
+        if (!itemName.value & (categoryField.dataset.category === 'null')) {
+          console.log('err');
+          itemName.classList.add('error-input');
+          categoryField.classList.add('label-errored');
+          this._messageBox.display(
+            'Article name cannot be empty\nCategory is not selected'
+          );
           return;
         }
-        this._overlayHard.classList.add('hidden');
+        if (!itemName.value) {
+          console.log('err');
+          itemName.classList.add('error-input');
+          this._messageBox.display('Article name cannot be empty');
+          return;
+        }
+        if (categoryField.dataset.category === 'null') {
+          categoryField.classList.add('label-errored');
+          this._messageBox.display('Category is not selected');
+          return;
+        }
+        this._addingItemInProgress = false;
+        const submitItemStatus = this._submitItemHandler(
+          itemName.value,
+          categoryField.dataset.category
+        );
+        if (submitItemStatus == 1) {
+          this._addingItemInProgress = true;
+          itemName.classList.add('error-input');
+          this._messageBox.display('Item already exists on shopping list');
+          return;
+        } else if (submitItemStatus == 2) {
+          this._addingItemInProgress = true;
+          itemName.classList.add('error-input');
+          this._messageBox.display('Item already exists on articles list');
+          return;
+        } else this._overlayHard.classList.add('hidden');
       }.bind(this)
     );
   }

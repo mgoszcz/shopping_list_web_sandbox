@@ -1,6 +1,7 @@
 import confirmIcon from 'url:../../icons/check-mark.png';
 import cancelIcon from 'url:../../icons/cancel.png';
 import editIcon from 'url:../../icons/draw.png';
+import { MessageBoxView } from './messageBoxView';
 
 class categoriesView {
   _parentElement = document.querySelector('.categories-window');
@@ -10,6 +11,7 @@ class categoriesView {
   _newCategoryButton = document.querySelector(
     '.categories__add-category-button'
   );
+  _messageBox = new MessageBoxView();
   _editInProgress = false;
   _data;
   _shoppingListItem;
@@ -120,14 +122,19 @@ class categoriesView {
         const newCategoryName = input.value;
         if (!newCategoryName) {
           input.classList.add('error-input');
+          this._messageBox.display('Category name cannot be empty');
           return;
         }
         if (newCategoryName === oldCategoryName) {
           input.classList.add('error-input');
+          this._messageBox.display('New category name is the same as old one');
           return;
         }
         if (!this._editCategoryHandler(oldCategoryName, newCategoryName)) {
           input.classList.add('error-input');
+          this._messageBox.display(
+            `Category ${newCategoryName} already exists`
+          );
           return;
         }
         this.findCategoryAndScroll(newCategoryName);
@@ -144,9 +151,15 @@ class categoriesView {
       function (e) {
         e.preventDefault();
         const newCategory = input.value;
-        if (!this._addCategoryHandler(newCategory)) {
-          console.log('Insert correct category name');
+        // console.log(newCategory);
+        if (!newCategory) {
           input.classList.add('error-input');
+          this._messageBox.display('Category name cannot be empty');
+          return;
+        }
+        if (!this._addCategoryHandler(newCategory)) {
+          input.classList.add('error-input');
+          this._messageBox.display(`Category ${newCategory} already exists`);
           return;
         }
         this.findCategoryAndScroll(newCategory);
