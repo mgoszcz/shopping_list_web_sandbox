@@ -13,6 +13,7 @@ import {
   saveData,
   shoppingListData,
   toggleChecked,
+  updateDataOnServer,
 } from './data/shoppingListData.js';
 import shoppingListView from './views/shoppingListView.js';
 import searchView from './views/searchView.js';
@@ -34,19 +35,21 @@ import {
   editCategoryName,
   removeUnusedCategories,
 } from './data/categoriesList.js';
+import { changeTracker } from './data/changeTracker.js';
 
 console.log('sandbox');
 
 const controlClickItem = function (id) {
   toggleChecked(id);
   shoppingListView.render(shoppingListData.shoppingList);
-  saveData();
+  updateDataOnServer(); // update
 };
 
 const controlQuantityChange = function (id, newQuantity) {
   const item = getShoppingListItemById(id);
   item.amount = Number(newQuantity);
-  saveData();
+  changeTracker.changeShoppingListItemAmount(item);
+  updateDataOnServer(); // update
 };
 
 const controlSearchFieldFocusIn = function (filterText) {
@@ -78,7 +81,7 @@ const controlAddShoppingListItem = function (itemName) {
   console.log(shoppingListData.shoppingList);
   sortByShop();
   shoppingListView.render(shoppingListData.shoppingList);
-  saveData();
+  updateDataOnServer(); // update
 };
 
 const controlCreateNewItem = function (itemName, category) {
@@ -88,16 +91,18 @@ const controlCreateNewItem = function (itemName, category) {
   shoppingListData.shoppingArticlesList.push(shoppingArticle);
   const shoppingListItem = new ShoppingListItem(shoppingArticle);
   shoppingListData.shoppingList.push(shoppingListItem);
+  changeTracker.addArticle(shoppingArticle);
+  changeTracker.addShoppingListItem(shoppingListItem);
   sortByShop();
   shoppingListView.render(shoppingListData.shoppingList);
-  saveData();
+  updateDataOnServer(); // update
   return 0;
 };
 
 const controlRemoveShoppingListItem = function (id) {
   deleteItem(id);
   shoppingListView.render(shoppingListData.shoppingList);
-  saveData();
+  updateDataOnServer(); // update
 };
 
 const controlDeleteAll = function () {
@@ -123,17 +128,19 @@ const controlSelectCategory = function (id, categoryName) {
   }
   const shoppingListItem = getShoppingListItemById(id);
   shoppingListItem.article.category = categoryName;
+  changeTracker.updateArticleCategory(shoppingListItem.article);
   removeUnusedCategories();
   sortByShop();
   shoppingListView.render(shoppingListData.shoppingList);
   categoriesView.hideWindow();
-  saveData();
+  updateDataOnServer(); // update
 };
 
 const controlAddCategory = function (newCategory) {
   if (shoppingListData.categories.includes(newCategory)) return false;
   shoppingListData.categories.push(newCategory);
   shoppingListData.categories.sort();
+  changeTracker.addCategory(newCategory); // it will be saved even if category not used
   categoriesView.render(shoppingListData.categories);
   return true;
 };
@@ -143,7 +150,7 @@ const controlEditCategoryName = function (oldName, newName) {
   editCategoryName(oldName, newName);
   shoppingListView.render(shoppingListData.shoppingList);
   categoriesView.render(shoppingListData.categories);
-  saveData();
+  updateDataOnServer(); // update
   return true;
 };
 

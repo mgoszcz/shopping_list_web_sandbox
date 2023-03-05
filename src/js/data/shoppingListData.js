@@ -1,7 +1,8 @@
-import { apiGet, apiPost } from './api';
+import { apiGet, apiPost, apiUpdate } from './api';
 import Shop from './shop';
 import ShoppingListItem, { sortByShop } from './shoppingListItem';
 import { ShoppingArticle } from './shoppingArticles';
+import { changeTracker } from './changeTracker';
 
 const removeDiacritics = require('diacritics').remove;
 
@@ -12,6 +13,7 @@ export const shoppingListData = {
   shoppingList: [],
   shops: [],
   shopsIcons: [],
+  timestamp: 0.0,
 };
 
 const loadArticles = function (articles) {
@@ -96,6 +98,22 @@ export const saveData = async function () {
   await apiPost(data);
 };
 
+export const updateDataOnServer = async function () {
+  const data = changeTracker.getRequest();
+  try {
+    const res = await apiUpdate(data);
+    console.log(res);
+    if (res.status == 400 || res.status == 501) {
+      console.log(`Update failed, saving all data, error: ${res.data.Error}`);
+      saveData();
+    }
+    changeTracker.clearRequests();
+  } catch (err) {
+    console.log(`Update failed, fatal: ${err}`);
+    // console.log(err);
+  }
+};
+
 export const generateShoppingListItemId = function (article_name) {
   let newId = removeDiacritics(article_name).replaceAll(' ', '_');
   const countOfItems = shoppingListData.shoppingList.filter(
@@ -125,4 +143,5 @@ export const getShoppingListItemById = function (id) {
 export const toggleChecked = function (item_id) {
   const item = getShoppingListItemById(item_id);
   item.checked = !item.checked;
+  changeTracker.clickShoppingListItem(item);
 };
