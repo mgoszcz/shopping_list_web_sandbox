@@ -87,10 +87,8 @@ class ChangeTracker {
     this._changesRequests.push(
       new UpdateRequestBuilder()
         .set_data_set(dataSetModel.shopping_list)
-        // .set_data_set('bad')
         .set_item_name(shoppingListItem.article.name)
-        // .set_action(actionsModel.update)
-        .set_action('rename')
+        .set_action(actionsModel.update)
         .set_data({ checked: shoppingListItem.checked })
         .build()
     );

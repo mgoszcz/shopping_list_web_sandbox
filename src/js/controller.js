@@ -8,6 +8,7 @@ dorobic reakcje na klikanie
 */
 
 import {
+  checkIfUpdateNeeded,
   getShoppingListItemById,
   loadData,
   saveData,
@@ -36,20 +37,41 @@ import {
   removeUnusedCategories,
 } from './data/categoriesList.js';
 import { changeTracker } from './data/changeTracker.js';
+import synchronizationView from './views/synchronizationView.js';
 
 console.log('sandbox');
+
+const controlSaveData = async function () {
+  synchronizationView.setSavingStatus();
+  const result = await saveData();
+  if (result) {
+    synchronizationView.setSynchedStatus();
+  } else {
+    synchronizationView.setSynchErrorStatus();
+  }
+};
+
+const controlUpdateData = async function () {
+  synchronizationView.setSavingStatus();
+  const result = await updateDataOnServer();
+  if (result) {
+    synchronizationView.setSynchedStatus();
+  } else {
+    synchronizationView.setSynchErrorStatus();
+  }
+};
 
 const controlClickItem = function (id) {
   toggleChecked(id);
   shoppingListView.render(shoppingListData.shoppingList);
-  updateDataOnServer(); // update
+  controlUpdateData(); // update
 };
 
 const controlQuantityChange = function (id, newQuantity) {
   const item = getShoppingListItemById(id);
   item.amount = Number(newQuantity);
   changeTracker.changeShoppingListItemAmount(item);
-  updateDataOnServer(); // update
+  controlUpdateData(); // update
 };
 
 const controlSearchFieldFocusIn = function (filterText) {
@@ -81,7 +103,7 @@ const controlAddShoppingListItem = function (itemName) {
   console.log(shoppingListData.shoppingList);
   sortByShop();
   shoppingListView.render(shoppingListData.shoppingList);
-  updateDataOnServer(); // update
+  controlUpdateData(); // update
 };
 
 const controlCreateNewItem = function (itemName, category) {
@@ -95,20 +117,28 @@ const controlCreateNewItem = function (itemName, category) {
   changeTracker.addShoppingListItem(shoppingListItem);
   sortByShop();
   shoppingListView.render(shoppingListData.shoppingList);
-  updateDataOnServer(); // update
+  controlUpdateData(); // update
   return 0;
 };
 
 const controlRemoveShoppingListItem = function (id) {
   deleteItem(id);
   shoppingListView.render(shoppingListData.shoppingList);
-  updateDataOnServer(); // update
+  controlUpdateData(); // update
+};
+
+const controlUpdateCheck = async function () {
+  // console.log(await checkIfUpdateNeeded());
+  const isNeeded = await checkIfUpdateNeeded();
+  if (!isNeeded) return;
+  synchronizationView.setSynchNeededStatus();
+  updateData();
 };
 
 const controlDeleteAll = function () {
   deleteAllItems();
   shoppingListView.render(shoppingListData.shoppingList);
-  saveData();
+  controlSaveData();
 };
 
 const controlOpenCategoryView = function (id) {
@@ -133,7 +163,7 @@ const controlSelectCategory = function (id, categoryName) {
   sortByShop();
   shoppingListView.render(shoppingListData.shoppingList);
   categoriesView.hideWindow();
-  updateDataOnServer(); // update
+  controlUpdateData(); // update
 };
 
 const controlAddCategory = function (newCategory) {
@@ -150,12 +180,29 @@ const controlEditCategoryName = function (oldName, newName) {
   editCategoryName(oldName, newName);
   shoppingListView.render(shoppingListData.shoppingList);
   categoriesView.render(shoppingListData.categories);
-  updateDataOnServer(); // update
+  controlUpdateData(); // update
   return true;
 };
 
+const updateData = async function () {
+  const loadResult = await loadData();
+  if (loadResult) {
+    synchronizationView.setSynchedStatus();
+  } else {
+    synchronizationView.setSynchErrorStatus();
+  }
+  menuView.displayCurrentShop(shoppingListData.currentShop.name);
+  shoppingListView.render(shoppingListData.shoppingList);
+  searchView.render(shoppingListData.shoppingArticlesList);
+};
+
 const init = async function () {
-  await loadData();
+  const loadResult = await loadData();
+  if (loadResult) {
+    synchronizationView.setSynchedStatus();
+  } else {
+    synchronizationView.setSynchErrorStatus();
+  }
   console.log(shoppingListData);
 
   menuView.displayCurrentShop(shoppingListData.currentShop.name);
@@ -178,5 +225,7 @@ const init = async function () {
   categoriesView.addHandlerSelectItem(controlSelectCategory);
   categoriesView.registerAddCategoryHandler(controlAddCategory);
   categoriesView.registerEditCategoryHandler(controlEditCategoryName);
+
+  setInterval(controlUpdateCheck, 10000);
 };
 init();

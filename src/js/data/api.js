@@ -1,15 +1,20 @@
 const URL = 'https://mgoszcz.pythonanywhere.com/shopping_list_test';
 // const URL = 'http://127.0.0.1:5000/shopping_list';
+const timestampUrl = `${URL}/timestamp`;
 
-export const apiGet = async function () {
+export const apiGet = async function (url = URL) {
   try {
-    const resp = await fetch(URL);
+    const resp = await fetch(url);
     const data = await resp.json();
     if (!resp.ok) throw new Error(`${data.message} (${resp.status})`);
     return data;
   } catch (err) {
     throw err;
   }
+};
+
+export const getTimestamp = async function () {
+  return await apiGet(timestampUrl);
 };
 
 export const apiPost = async function (uploadData) {

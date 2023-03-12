@@ -1,4 +1,4 @@
-import { apiGet, apiPost, apiUpdate } from './api';
+import { apiGet, apiPost, apiUpdate, getTimestamp } from './api';
 import Shop from './shop';
 import ShoppingListItem, { sortByShop } from './shoppingListItem';
 import { ShoppingArticle } from './shoppingArticles';
@@ -14,6 +14,24 @@ export const shoppingListData = {
   shops: [],
   shopsIcons: [],
   timestamp: 0.0,
+};
+
+const resetData = function () {
+  shoppingListData.categories = [];
+  shoppingListData.currentShop = null;
+  shoppingListData.shoppingArticlesList = [];
+  shoppingListData.shoppingList = [];
+  shoppingListData.shops = [];
+  shoppingListData.shopsIcons = [];
+};
+
+export const checkIfUpdateNeeded = async function () {
+  const res = await getTimestamp();
+  console.log(res.timestamp);
+  if (res.timestamp > shoppingListData.timestamp) {
+    return true;
+  }
+  return false;
 };
 
 const loadArticles = function (articles) {
@@ -52,6 +70,7 @@ export const loadDataFromJSON = function (jsonData) {
     shop => shop.name === jsonData.current_shop
   );
   shoppingListData.shopsIcons = jsonData.shops_icons;
+  shoppingListData.timestamp = jsonData.timestamp;
 };
 
 export const saveDataToJSON = function () {
@@ -88,14 +107,20 @@ export const saveDataToJSON = function () {
 };
 
 export const loadData = async function () {
+  resetData();
   const { shopping_list } = await apiGet();
   loadDataFromJSON(shopping_list);
   sortByShop();
+  console.log(`Data loaded, current timestamp: ${shoppingListData.timestamp}`);
+  return true;
 };
 
 export const saveData = async function () {
   const data = saveDataToJSON();
-  await apiPost(data);
+  const res = await apiPost(data);
+  shoppingListData.timestamp = res.timestamp;
+  console.log(`Data saved, new timestamp: ${shoppingListData.timestamp}`);
+  return true;
 };
 
 export const updateDataOnServer = async function () {
@@ -107,7 +132,12 @@ export const updateDataOnServer = async function () {
       console.log(`Update failed, saving all data, error: ${res.data.Error}`);
       saveData();
     }
+    if (res.status != 201 && res.status != 400 && res.status != 501)
+      return false;
     changeTracker.clearRequests();
+    shoppingListData.timestamp = res.data.timestamp;
+    console.log(`Data updated, new timestamp: ${shoppingListData.timestamp}`);
+    return true;
   } catch (err) {
     console.log(`Update failed, fatal: ${err}`);
     // console.log(err);

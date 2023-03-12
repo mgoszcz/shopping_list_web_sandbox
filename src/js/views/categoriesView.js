@@ -188,7 +188,7 @@ class categoriesView {
   }
 
   render(data) {
-    this._data = data;
+    this._data = data.sort();
     const currentCategory = this._shoppingListItem.article?.category;
     const markup = this._data
       .map(item => {
