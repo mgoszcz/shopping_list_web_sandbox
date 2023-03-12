@@ -1,8 +1,5 @@
 CURRENT:
 
-error in adding ctageory - done
-error in adding item - todo - input and category
-
 articles window
 
 ###
@@ -10,6 +7,9 @@ articles window
 Implement quantity handling - DONE
 Improve quantity display - DONE
 Work on mobile display
+
+error in adding ctageory - done
+error in adding item - done
 
 push data to server when changing data - DONE
 
@@ -39,5 +39,6 @@ Implement clearing whole list - DONE
 
 Implement order change (drag and drop)
 
-...
+... future
 Update not render on small changes
+error in inputs - remove border when start typing
