@@ -480,3 +480,24 @@ input::-webkit-inner-spin-button {
 .label-errored {
   color: red;
 }
+
+.load-needed {
+  background-color: lightpink;
+}
+
+.synched {
+  background-color: green;
+}
+
+.saving {
+  background-color: orange;
+}
+
+.synch-error {
+  background-color: red;
+}
+
+.synch-text {
+  font-size: 1.5rem;
+  margin: 1rem;
+}

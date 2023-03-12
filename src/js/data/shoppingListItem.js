@@ -1,3 +1,4 @@
+import { changeTracker } from './changeTracker';
 import {
   generateShoppingListItemId,
   getShoppingListItemById,
@@ -25,7 +26,9 @@ export const getShoppingListItemByName = function (articleName) {
 };
 
 export const addArticleToShoppingList = function (article) {
-  shoppingListData.shoppingList.push(new ShoppingListItem(article));
+  const new_item = new ShoppingListItem(article);
+  shoppingListData.shoppingList.push(new_item);
+  changeTracker.addShoppingListItem(new_item);
 };
 
 export const sortByShop = function () {
@@ -66,4 +69,5 @@ export const deleteItem = function (itemId) {
     shoppingListData.shoppingList.indexOf(itemToRemove),
     1
   );
+  changeTracker.removeShopppingListItem(itemToRemove);
 };

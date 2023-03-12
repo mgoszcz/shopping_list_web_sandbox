@@ -1,3 +1,4 @@
+import { changeTracker } from './changeTracker';
 import { shoppingListData } from './shoppingListData';
 
 export const removeUnusedCategories = function () {
@@ -12,6 +13,7 @@ export const removeUnusedCategories = function () {
   categoriesToRemove.forEach(category => {
     const index = shoppingListData.categories.indexOf(category);
     shoppingListData.categories.splice(index, 1);
+    changeTracker.removeCategory(category);
   });
   console.log(shoppingListData.categories);
 };
@@ -30,4 +32,6 @@ export const editCategoryName = function (oldName, newName) {
     const oldNameIndex = shop.categoryList.indexOf(oldName);
     if (oldNameIndex !== -1) shop.categoryList[oldNameIndex] = newName;
   });
+  changeTracker.addCategory(newName);
+  changeTracker.removeCategory(oldName);
 };
