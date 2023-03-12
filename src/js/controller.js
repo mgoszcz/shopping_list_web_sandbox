@@ -39,6 +39,9 @@ import {
 import { changeTracker } from './data/changeTracker.js';
 import synchronizationView from './views/synchronizationView.js';
 
+const updateCheckInterval = 10000;
+const pauseUpdateCheck = false;
+
 console.log('sandbox');
 
 const controlSaveData = async function () {
@@ -128,7 +131,7 @@ const controlRemoveShoppingListItem = function (id) {
 };
 
 const controlUpdateCheck = async function () {
-  // console.log(await checkIfUpdateNeeded());
+  if (pauseUpdateCheck) return;
   const isNeeded = await checkIfUpdateNeeded();
   if (!isNeeded) return;
   synchronizationView.setSynchNeededStatus();
@@ -226,6 +229,6 @@ const init = async function () {
   categoriesView.registerAddCategoryHandler(controlAddCategory);
   categoriesView.registerEditCategoryHandler(controlEditCategoryName);
 
-  setInterval(controlUpdateCheck, 10000);
+  setInterval(controlUpdateCheck, updateCheckInterval);
 };
 init();
