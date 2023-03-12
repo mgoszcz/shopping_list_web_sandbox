@@ -1,4 +1,4 @@
-const URL = 'https://mgoszcz.pythonanywhere.com/shopping_list_test';
+const URL = 'https://mgoszcz.pythonanywhere.com/shopping_list';
 // const URL = 'http://127.0.0.1:5000/shopping_list';
 const timestampUrl = `${URL}/timestamp`;
 
