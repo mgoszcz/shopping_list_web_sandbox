@@ -9,6 +9,14 @@ class MenuView {
     });
   }
 
+  addHandlerDisplayArticlesWindow(handler) {
+    this._parentElement.addEventListener('click', function (e) {
+      const target = e.target.closest('.menu-shopping-articles-button');
+      if (!target) return;
+      handler();
+    });
+  }
+
   displayCurrentShop(data) {
     this._currentShopName.textContent = data;
   }

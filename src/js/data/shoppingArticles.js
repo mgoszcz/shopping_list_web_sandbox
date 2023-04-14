@@ -1,4 +1,6 @@
+import { changeTracker } from './changeTracker';
 import { generateArticleId, shoppingListData } from './shoppingListData';
+import { getShoppingListItemByName } from './shoppingListItem';
 
 const removeDiacritics = require('diacritics').remove;
 
@@ -44,4 +46,18 @@ export const getArticleByName = function (articleName) {
   if (newList.length > 1)
     throw new Error('More than one article with the same name found');
   return newList[0];
+};
+
+export const removeArticle = function (articleId) {
+  const article = shoppingListData.shoppingArticlesList.filter(
+    item => item.id === articleId
+  )[0];
+  console.log(article);
+  const articleName = article.name;
+  const index = shoppingListData.shoppingArticlesList.indexOf(article);
+  if (index == -1) throw new Error('Article to remove not found');
+  if (getShoppingListItemByName(articleName) != null)
+    throw new Error('Article is added to shopping list');
+  shoppingListData.shoppingArticlesList.splice(index, 1);
+  changeTracker.deleteArticle(articleName);
 };

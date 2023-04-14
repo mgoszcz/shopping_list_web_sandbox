@@ -21,6 +21,7 @@ import searchView from './views/searchView.js';
 import {
   filterArticles,
   getArticleByName,
+  removeArticle,
   ShoppingArticle,
 } from './data/shoppingArticles.js';
 import ShoppingListItem, {
@@ -38,9 +39,10 @@ import {
 } from './data/categoriesList.js';
 import { changeTracker } from './data/changeTracker.js';
 import synchronizationView from './views/synchronizationView.js';
+import articlesView from './views/articlesView.js';
 
 const updateCheckInterval = 10000;
-const pauseUpdateCheck = false;
+const pauseUpdateCheck = true;
 
 console.log('sandbox');
 
@@ -124,6 +126,16 @@ const controlCreateNewItem = function (itemName, category) {
   return 0;
 };
 
+const controlCreateNewArticle = function (articleName, category) {
+  if (getArticleByName(itemName)) return 1;
+  const shoppingArticle = new ShoppingArticle(itemName, category);
+  shoppingListData.shoppingArticlesList.push(shoppingArticle);
+  changeTracker.addArticle(shoppingArticle);
+  articlesView.render(shoppingListData.shoppingArticlesList);
+  controlUpdateData(); // update
+  return 0;
+};
+
 const controlRemoveShoppingListItem = function (id) {
   deleteItem(id);
   shoppingListView.render(shoppingListData.shoppingList);
@@ -199,6 +211,18 @@ const updateData = async function () {
   searchView.render(shoppingListData.shoppingArticlesList);
 };
 
+const controlOpenArticlesWindow = function () {
+  articlesView.showWindow();
+  articlesView.render(shoppingListData.shoppingArticlesList);
+};
+
+const controlRemoveArticle = function (articleId) {
+  removeArticle(articleId);
+  removeUnusedCategories();
+  articlesView.render(shoppingListData.shoppingArticlesList);
+  controlUpdateData();
+};
+
 const init = async function () {
   const loadResult = await loadData();
   if (loadResult) {
@@ -224,10 +248,14 @@ const init = async function () {
   searchView.addHandlerKeyPress(controlSearchFieldKeyPress);
   searchView.addHandlerButtonPress(controlAddShoppingListItem);
   menuView.addHandlerDeleteAll(controlDeleteAll);
+  menuView.addHandlerDisplayArticlesWindow(controlOpenArticlesWindow);
 
   categoriesView.addHandlerSelectItem(controlSelectCategory);
   categoriesView.registerAddCategoryHandler(controlAddCategory);
   categoriesView.registerEditCategoryHandler(controlEditCategoryName);
+
+  articlesView.registerHandlerRemoveArticle(controlRemoveArticle);
+  articlesView.registerHandlerAddArticles(controlCreateNewArticle);
 
   setInterval(controlUpdateCheck, updateCheckInterval);
 };

@@ -196,33 +196,32 @@
           src="./src/icons/plus.png"
           alt="Add"
         />
-        <div class="new-article-fields">
-          <div class="item-label-container">
-            <input class="new-item-name new-article-input"></input>
-          </div>
-          <div class="category-container">
-            <span class="category-label new-article-category" data-category=null>Select category...</span>
-          </div>
-          <div class="confirm-item-button">
-              <img
-              class="list-item-button"
-              src="./src/icons/check-mark.png"
-              alt="Confirm"
-              />
-          </div>
-          <div class="cancel-button">
-              <img
-              class="list-item-button"
-              src="./src/icons/cancel.png"
-              alt="Cancel"
-              />
-          </div>
-        </div>
       </div>
       <div class="articles-list-container">
         <ul class="articles-list">
-          <li class="'articles-list-item">
-
+          <li class="articles-list-item shooping-list-item">
+            <div class="articles-list-item-container list-item-content">
+              <div class="item-label-container">
+                <span class="item-label">mleko</span>
+              </div>
+              <div class="category-container">
+                <span class="category-label">nabiał</span>
+              </div>
+              <div class="edit-button-container">
+                <img
+                  class="list-item-button"
+                  src="./src/icons/draw.png"
+                  alt="Edit"
+                />
+              </div>
+              <div class="delete-button-container">
+                <img
+                  class="list-item-button"
+                  src="./src/icons/delete.png"
+                  alt="Delete"
+                />
+              </div>
+            </div>
           </li>
         </ul>
       </div>
@@ -233,7 +232,9 @@
         <button class="btn--close-modal close-message">&times;</button>
       </div>
       <div class="message-text-container">
-        <label class="message-text">This is an error displayed here because you did sth wrong</label>
+        <label class="message-text"
+          >This is an error displayed here because you did sth wrong</label
+        >
       </div>
     </div>
   </body>

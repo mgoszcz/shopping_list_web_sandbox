@@ -84,6 +84,17 @@ input::-webkit-inner-spin-button {
   padding: 0;
 }
 
+.articles-list-container {
+  display: block;
+  height: calc(100% - 11.5rem);
+}
+
+.articles-list {
+  padding: 0;
+  overflow-y: scroll;
+  height: 100%;
+}
+
 .shooping-list-item {
   background-color: var(--color-list-item-light);
   list-style: none;
@@ -92,9 +103,20 @@ input::-webkit-inner-spin-button {
   border-radius: 0.3rem;
 }
 
+.articles-list-item {
+  list-style: none;
+  width: calc(100% - 0.6rem);
+  margin: 0.3rem;
+  border-radius: 0.3rem;
+}
+
 .shopping-list-item:hover {
   background-color: var(--color-list-item-light-hovered);
 }
+
+/* .articles-list-item:hover {
+  background-color: var(--color-list-item-light-hovered);
+} */
 
 .list-item-content {
   margin: 1rem, 0;
@@ -107,6 +129,11 @@ input::-webkit-inner-spin-button {
 
 .shopping-list-item-container {
   height: 5rem;
+}
+
+.articles-list-item-container {
+  height: 3rem;
+  background-color: var(--color-list-item-light);
 }
 
 .list-item-content:hover {
@@ -146,6 +173,7 @@ input::-webkit-inner-spin-button {
   margin: 0 0.5rem;
   opacity: 50%;
   cursor: pointer;
+  display: flex;
 }
 
 .list-item-unordered {
@@ -366,6 +394,7 @@ input::-webkit-inner-spin-button {
   background-color: #d3d3d377;
   position: relative;
   z-index: 1000;
+  opacity: 1;
 }
 
 .new-item-name {
@@ -500,4 +529,12 @@ input::-webkit-inner-spin-button {
 .synch-text {
   font-size: 1.5rem;
   margin: 1rem;
+}
+
+.articles-list-item {
+  margin: 0.3rem;
+}
+
+.add-new-article-container {
+  visibility: hidden;
 }
