@@ -209,6 +209,7 @@ const selectCurentShop = function (shopName) {
   controlUpdateData(); // update
   menuView.displayCurrentShop();
   shoppingListView.render(shoppingListData.shoppingList);
+  return true;
 };
 
 const init = async function () {
