@@ -38,6 +38,7 @@ import {
 } from './data/categoriesList.js';
 import { changeTracker } from './data/changeTracker.js';
 import synchronizationView from './views/synchronizationView.js';
+import shopSelectorView from './views/shopSelectorView.js';
 
 const updateCheckInterval = 10000;
 const pauseUpdateCheck = false;
@@ -199,6 +200,18 @@ const updateData = async function () {
   searchView.render(shoppingListData.shoppingArticlesList);
 };
 
+const selectCurentShop = function (shopName) {
+  const newShop = shoppingListData.shops.find(item => item.name === shopName);
+  if (newShop === shoppingListData.currentShop) return false;
+  shoppingListData.currentShop = newShop;
+  changeTracker.updateCurrentShop(newShop.name);
+  sortByShop();
+  controlUpdateData(); // update
+  menuView.displayCurrentShop();
+  shoppingListView.render(shoppingListData.shoppingList);
+  return true;
+};
+
 const init = async function () {
   const loadResult = await loadData();
   if (loadResult) {
@@ -208,7 +221,8 @@ const init = async function () {
   }
   console.log(shoppingListData);
 
-  menuView.displayCurrentShop(shoppingListData.currentShop.name);
+  menuView.initializeMenu(shoppingListData);
+  menuView.displayCurrentShop();
 
   shoppingListView.setCategoryHandler(controlOpenCategoryView);
   shoppingListView.render(shoppingListData.shoppingList);
@@ -228,6 +242,8 @@ const init = async function () {
   categoriesView.addHandlerSelectItem(controlSelectCategory);
   categoriesView.registerAddCategoryHandler(controlAddCategory);
   categoriesView.registerEditCategoryHandler(controlEditCategoryName);
+
+  shopSelectorView.addHandlerClickItem(selectCurentShop);
 
   setInterval(controlUpdateCheck, updateCheckInterval);
 };

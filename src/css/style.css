@@ -172,6 +172,13 @@ input::-webkit-inner-spin-button {
   display: inline-block;
 }
 
+.shop-list-dropdown {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  display: inline-block;
+}
+
 .dropdown-content {
   display: block;
   position: absolute;
@@ -189,6 +196,15 @@ input::-webkit-inner-spin-button {
 }
 
 .dropdown__articles-list {
+  height: 100%;
+  z-index: 1;
+  overflow-y: scroll;
+  margin: 0;
+  list-style: none;
+  padding-left: 1rem;
+}
+
+.shop-list {
   height: 100%;
   z-index: 1;
   overflow-y: scroll;
@@ -276,6 +292,17 @@ input::-webkit-inner-spin-button {
   /* transform: translate(-25%, -50%); */
 }
 
+.shops-window {
+  position: fixed;
+  top: 10%;
+  right: 25%;
+  width: 50%;
+  height: 75%;
+  background-color: white;
+  z-index: 1000;
+  /* transform: translate(-25%, -50%); */
+}
+
 .add-button {
   height: 2rem;
   margin-top: 1rem;
@@ -342,6 +369,30 @@ input::-webkit-inner-spin-button {
 
 .categories__category_item {
   height: 3rem;
+}
+
+.shop-list-container {
+  display: block;
+  height: calc(100% - 9.5rem);
+  /* margin-top: 3rem; */
+}
+
+.shop-list-item {
+  height: 2rem;
+}
+
+.shop-list {
+  list-style: none;
+  padding: 0 0.5rem;
+  margin: 0;
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.shop-label-container {
+  width: 95%;
+  margin-left: 0.5rem;
+  height: 100%;
 }
 
 .window-title {
