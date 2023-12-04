@@ -14,7 +14,6 @@ class shopSelectorView {
   }
 
   showWindow(data) {
-    console.log(this._shopsList);
     this._data = data;
     this._parentElement.classList.remove('hidden');
     this._overlay.classList.remove('hidden');
