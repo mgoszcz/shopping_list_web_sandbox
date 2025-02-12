@@ -41,7 +41,7 @@ import synchronizationView from './views/synchronizationView.js';
 import shopSelectorView from './views/shopSelectorView.js';
 
 const updateCheckInterval = 10000;
-const pauseUpdateCheck = false;
+const pauseUpdateCheck = true;
 
 console.log('sandbox');
 

@@ -14,6 +14,7 @@ class ShoppingListView {
   _categoryHandler;
   _removeItemHandler;
   _submitItemHandler;
+  _listItems;
 
   addHandlerClickItem(handler) {
     this._parentElement.addEventListener(
@@ -129,6 +130,27 @@ class ShoppingListView {
     this._removeItemHandler(id);
   }
 
+  onDragEnter(ev) {
+    const item = ev.target.closest('.shooping-list-item');
+    if (!item) return;
+    console.log(item.dataset.id);
+    // item.style.backgroundColor = 'red';
+    item.style.marginTop = '1rem';
+    const index = this._listItems.indexOf(
+      this._listItems.find(element => element.dataset.id === item.dataset.id)
+    );
+    // this._listItems.slice(index).forEach(element => {
+    //   element.style.color = 0;
+    // });
+  }
+
+  onDragLeave(ev) {
+    const item = ev.target.closest('.shooping-list-item');
+    if (!item) return;
+    // item.style.backgroundColor = 'red';
+    item.style.marginTop = '0';
+  }
+
   render(data) {
     if (this._addingItemInProgress) return;
     this._data = data;
@@ -138,7 +160,7 @@ class ShoppingListView {
         return `
         <li class="shooping-list-item ${
           item.ordered ? '' : 'list-item-unordered'
-        }" data-id="${item.id}">
+        }" data-id="${item.id}" draggable="true">
           <div class="shopping-list-item-container list-item-content ${
             item.checked ? 'checked-item' : ''
           }">
@@ -178,6 +200,23 @@ class ShoppingListView {
       .join('');
     this._clear();
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
+    this._listItems = Array.from(
+      this._parentElement.getElementsByClassName('shooping-list-item')
+    );
+    console.log(this._listItems);
+    this._parentElement.addEventListener(
+      'dragover',
+      this.onDragEnter.bind(this)
+    );
+    this._parentElement.addEventListener(
+      'dragleave',
+      this.onDragLeave.bind(this)
+    );
+    // this._listItems.forEach(element => {
+    //   // element.addEventListener('dragenter', this.onDragEnter.bind(this));
+    //   element.addEventListener('dragleave', this.onDragLeave.bind(this));
+    // });
+    console.log(this._listItems);
   }
 
   renderNewItem(newItemName) {

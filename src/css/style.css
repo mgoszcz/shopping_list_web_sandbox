@@ -89,6 +89,7 @@ input::-webkit-inner-spin-button {
   list-style: none;
   width: 50%;
   margin: 0.3rem;
+  /* margin-top: 1rem; */
   border-radius: 0.3rem;
 }
 
